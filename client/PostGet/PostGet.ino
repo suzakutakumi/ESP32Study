@@ -1,7 +1,7 @@
 #include<WiFi.h>
 
-const char* ssid     = "SUZAKU_PC";
-const char* password = "Suzaku2121";
+const char* ssid     = "ssid";
+const char* password = "password";
 
 const char* HOST = "192.168.137.1";
 const String POST_URL = "/postData";
