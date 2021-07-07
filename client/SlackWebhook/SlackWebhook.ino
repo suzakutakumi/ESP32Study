@@ -1,7 +1,7 @@
 #include<WiFiClientSecure.h>
 
-const char* ssid     = "SUZAKU_PC";
-const char* password = "suzaku1212";
+const char* ssid     = "ssid";
+const char* password = "password";
 
 const char* HOST = "hooks.slack.com";
 const String URL = "/services/hogehoge";
