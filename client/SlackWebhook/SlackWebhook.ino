@@ -1,0 +1,42 @@
+#include<WiFiClientSecure.h>
+
+const char* ssid     = "SUZAKU_PC";
+const char* password = "suzaku1212";
+
+const char* HOST = "hooks.slack.com";
+const String URL = "/services/hogehoge";
+
+void Send(String mes) {
+  WiFiClientSecure client;
+  String cont = "{\"text\": \"" + mes + "\"}";
+  if (!client.connect(HOST, 443)) {
+    Serial.println("Not connect");
+    return;
+  }
+  client.println("POST " + URL + " HTTP/1.1");
+  client.println("Content-Length: " + String(cont.length()));
+  client.println("Content-Type: application/json");
+  client.println("Host: " + String(HOST));
+  client.println("Accept: */*");
+  client.println("Connection: close");
+  client.println();
+  client.println(cont);
+  Serial.println(cont);
+}
+void setup() {
+  WiFi.begin(ssid, password);
+  Serial.begin(115200);
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(500);
+  }
+  Serial.println("Start");
+}
+
+void loop() {
+  if(Serial.available()>0){
+    String c=Serial.readStringUntil('\n');
+    c.replace("\r","");
+    Send(c);
+  }
+}
